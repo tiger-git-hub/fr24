@@ -1,3 +1,6 @@
 <script>
-  location.href="https://www.flightradar24.com/JAL74/";
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const flightNumber = urlParams.get('flightNumber')
+  location.href="https://www.flightradar24.com/" + flightNumber;
 </script>
