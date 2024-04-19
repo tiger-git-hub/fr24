@@ -2,5 +2,25 @@
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const flightNumber = urlParams.get('flightNumber')
-  location.href="https://www.flightradar24.com/" + flightNumber;
+
+  const xhr = new XMLHttpRequest();
+  const reqParams = new URLSearchParams({
+      query: flightNumber,
+      limit: 1,
+      type: "live",
+  });
+
+  xhr.open("GET", "https://www.flightradar24.com/v1/search/web/find?" + reqParams.toString());
+  xhr.send();
+  xhr.responseType = "json";
+  xhr.onload = () => {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+	  const data = xhr.response;
+	  console.log(data);
+      } else {
+	  console.log(`Error: ${xhr.status}`);
+      }
+  };
+  
+  //location.href="https://www.flightradar24.com/" + flightNumber;
 </script>
