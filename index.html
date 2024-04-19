@@ -1,17 +1,20 @@
 <script>
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const gasDeployID = urlParams.get('gasDeployID');
-  const flightNumber = urlParams.get('flightNumber');
-  const reqUrl = "https://script.google.com/macros/s/" + gasDeployID + "/exec?flightNumber=" + flightNumber;
-  fetch(reqUrl, {
-      method: 'GET',
-      headers: {
-	  'Accept': 'application/json',
-          'Content-Type': 'application/x-www-form-urlencoded',
-      },
-  }).then((res) => {
-      console.log(res.json);
-});
-  //location.href="https://www.flightradar24.com/" + flightNumber;
+  let queryString = window.location.search;
+  let urlParams = new URLSearchParams(queryString);
+  let gasDeployID = urlParams.get('gasDeployID');
+  let flightNumber = urlParams.get('flightNumber');
+  let reqUrl = "https://script.google.com/macros/s/" + gasDeployID + "/exec?flightNumber=" + flightNumber;
+  (async function(){
+      let res = await fetch(reqUrl, {
+	  method: 'GET',
+	  headers: {
+	      'Accept': 'application/json',
+              'Content-Type': 'application/x-www-form-urlencoded',
+	  },
+      });
+      let data = await res.json();
+      let frData = JSON.parse(data);
+      let frID = frData.results[0].id;
+      location.href="https://www.flightradar24.com/" + flightNumber + '/' + frID;
+  })();
 </script>
