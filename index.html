@@ -1,3 +1,18 @@
+<style>
+  * {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height:100vh;
+  }
+  
+  iframe {
+      border:none;
+      width:100%;
+      height:100%;
+  }
+</style>
+<iframe src="https://tiger-git-hub.github.io/loading/"></iframe>
 <script>
   let queryString = window.location.search;
   let urlParams = new URLSearchParams(queryString);
@@ -14,7 +29,14 @@
       });
       let data = await res.json();
       let frData = JSON.parse(data);
-      let frID = frData.results[0].id;
-      location.href="https://www.flightradar24.com/" + flightNumber + '/' + frID;
+      console.log(frData);
+      let url = "https://www.flightradar24.com/";
+      if(frData.results.length) {
+	  let frID = frData.results[0].id;
+	  url += flightNumber + "/" + frID;
+      }else {
+	  url += "data/flights/" + flightNumber;
+      }
+      location.href = url;
   })();
 </script>
