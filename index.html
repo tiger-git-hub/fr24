@@ -30,13 +30,13 @@
       let data = await res.json();
       let frData = JSON.parse(data);
       let url = "https://www.flightradar24.com/";
-      if(frData.results.length && frData.results[0].detail.flight.toLowerCase() == flightNumber) {
+      if(frData.results.length && frData.results[0].detail.flight.toLowerCase() == flightNumber) { // 前方一致したリストが返ってくるため完全一致判定を実施
 	  let frID = frData.results[0].id;
 	  url += flightNumber + "/" + frID;
       }else {
 	  url += "data/flights/" + flightNumber;
       }
       location.replace(url);
-      setTimeout(function(){window.close()}, 10000);
+      setTimeout(function(){window.close()}, 5000); // 通常であれば↑にてページ遷移が発生するため本ラインはユニバーサルリンク発動時のみ有効
   })();
 </script>
