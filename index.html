@@ -5,6 +5,7 @@
       overflow: hidden;
       height:100vh;
   }
+  
   iframe {
       border:none;
       width:100%;
@@ -29,13 +30,13 @@
       let data = await res.json();
       let frData = JSON.parse(data);
       let url = "https://www.flightradar24.com/";
-      if(frData.results.length) {
+      if(frData.results.length && frData.results[0].detail.flight.toLowerCase() == flightNumber) {
 	  let frID = frData.results[0].id;
 	  url += flightNumber + "/" + frID;
       }else {
 	  url += "data/flights/" + flightNumber;
       }
       location.replace(url);
-      //window.close();
+      setTimeout(window.close(), 3000);
   })();
 </script>
