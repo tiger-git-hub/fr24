@@ -29,7 +29,6 @@
       });
       let data = await res.json();
       let frData = JSON.parse(data);
-      console.log(frData);
       let url = "https://www.flightradar24.com/";
       if(frData.results.length) {
 	  let frID = frData.results[0].id;
@@ -37,6 +36,6 @@
       }else {
 	  url += "data/flights/" + flightNumber;
       }
-      location.href = url;
+      location.replace(url);
   })();
 </script>
