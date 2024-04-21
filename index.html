@@ -36,7 +36,11 @@
       }else {
 	  url += "data/flights/" + flightNumber;
       }
-      location.replace(url);
-      setTimeout(function(){window.close()}, 5000); // 通常であれば↑にてページ遷移が発生するため本ラインはユニバーサルリンク発動時のみ有効
+//      await new Promise((resolve)=>{ // awaitしないと↓のwindow.close();が作動してしまう
+	  location.replace(url);
+//	  resolve();
+//      });
+      window.close();
+      //setTimeout(function(){window.close()}, 5000); // 通常であれば↑にてページ遷移が発生するため本ラインはユニバーサルリンク発動時のみ有効
   })();
 </script>
